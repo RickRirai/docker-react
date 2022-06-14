@@ -3,12 +3,16 @@ FROM node:16-alpine
 WORKDIR '/app'
 
 COPY package.json .
-#COPY --chown=node:node package.json .
-RUN npm config set strict-ssl false --location=global
-RUN npm install npm -g --ca=""
+
+#working local
+#RUN npm config set strict-ssl false --location=global
+#RUN npm install npm -g --ca=""
+
+RUN npm install
 
 COPY . .
-#COPY --chown=node:node . .
-USER node
+
+#working local
+#USER node
 
 CMD ["npm", "run", "start"]
