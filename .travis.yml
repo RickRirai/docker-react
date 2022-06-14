@@ -6,6 +6,18 @@ services:
 before_install:
   - docker build -t rickrirai/docker-react -f dockerfile.dev .
 
-script:
-  #- docker run -e CI=true rickrirai/docker-react:latest npm run test
-  - docker run rickrirai/docker-react:latest
+# script:
+#   #- docker run -e CI=true rickrirai/docker-react:latest npm run test
+#   - docker run rickrirai/docker-react:latest
+
+deploy:
+  provider: elesticbeanstalk
+  region: "us-east-1"
+  app: "docker-react"
+  env: "Dockerreact-env"
+  bucket_name: "elasticbeanstalk-us-east-1-562744789135"
+  bucket_path: "docker-react"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: "$AWS_SECRET_KEY"
