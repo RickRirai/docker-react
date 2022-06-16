@@ -2,8 +2,7 @@ FROM node:16-alpine
 WORKDIR '/app'
 
 COPY package.json .
-RUN npm config set strict-ssl false --global
-RUN npm install npm -g --ca=""
+RUN npm install
 COPY . .
 RUN npm run build
 
